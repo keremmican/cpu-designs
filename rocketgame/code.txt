@@ -1,0 +1,85 @@
+.data
+        x_ship:0x0140
+        y_ship:0x00f0
+        VD: 464
+        HD: 628
+.code
+basla    ldi 5 0xb01
+         ldi 6 x_ship
+         ld 6 6
+         st 5 6
+         ldi 5 0xb02
+         ldi 6 y_ship
+         ld 6 6
+         st 5 6
+init     ldi 3 0x801
+         ld 3 3
+         ldi 4 0x0001
+         and 3 3 4
+         jz init
+         ldi 0 0x800
+         ld 0 0
+         ldi 2 0x23
+         sub 3 2 0
+         jz rightkey
+         ldi 2 0x1c
+         sub 3 2 0
+         jz leftkey
+         ldi 2 0x1b
+         sub 3 2 0
+         jz downkey
+         ldi 2 0x1d
+         sub 3 2 0
+         jz upkey
+         jmp init
+rightkey ldi 6 x_ship
+         ld 6 6
+         ldi 4 HD
+         ld 4 4
+         sub 4 6 4
+         jz init
+         ldi 4 0x0004
+         add 6 6 4
+         ldi 5 x_ship
+         st 5 6
+         ldi 4 0xb01
+         st 4 6
+         jmp init
+leftkey  ldi 6 x_ship
+         ld 6 6
+         ldi 4 0x0000
+         sub 4 6 4
+         jz init
+         ldi 4 0x0004
+         sub 6 6 4
+         ldi 5 x_ship
+         st 5 6
+         ldi 4 0xb01
+         st 4 6
+         jmp init
+downkey  ldi 6 y_ship
+         ld 6 6
+         ldi 4 VD
+         ld 4 4
+         sub 4 6 4
+         jz init
+         ldi 4 0x0004
+         add 6 6 4
+         ldi 5 y_ship
+         st 5 6
+         ldi 4 0xb02
+         st 4 6
+         jmp init
+upkey    ldi 6 y_ship
+         ld 6 6
+         ldi 4 0x0078
+         ld 4 4
+         sub 4 6 4
+         jz init
+         ldi 4 0x0004
+         sub 6 6 4
+         ldi 5 y_ship
+         st 5 6
+         ldi 4 0xb02
+         st 4 6
+         jmp init
